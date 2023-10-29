@@ -16,7 +16,7 @@ Componentes Angular ao serem criados são divididos em arquivos separados.
 
 `.spec ⇒` arquivos de testes
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/b873b622-685d-41c1-9cf3-d1644eb0b2cc/9db02459-be86-421e-8c98-01dbfd2fa81f/Untitled.png)
+![Untitled](../angular-journal/angular-journal/src/assets/arquivos-de-um%20-componente.png)
 
 ### Criação de um componente Angular:
 
