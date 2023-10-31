@@ -16,7 +16,7 @@ Componentes Angular ao serem criados são divididos em arquivos separados.
 
 `.spec ⇒` arquivos de testes
 
-![Untitled](../angular-journal/angular-journal/src/assets/arquivos-de-um%20-componente.png)
+![](../angular-journal/angular-journal/src/assets/arquivos-de-um-componente.png)
 
 ### Criação de um componente Angular:
 
@@ -81,4 +81,65 @@ import { FirstComponentComponent } from './components/first-component/first-comp
 export class AppModule { }
 ```
 
-a
+## Dia 2 ⇒ `Services` e injeção de dependências
+
+### `Services`
+
+São um parte fundamental da arquitetura Angular, geralmente são neles que ficam localizadas as requisições `HTTP` 
+
+É possível criar através da linha de comando através ⇒ `ng generate service <nome do service >` 
+
+`Services` são classes `TypeScript` que podem ser injetadas por toda a aplicação.
+
+```
+import { Injectable } from '@angular/core';
+// DECORATOR ANGULAR QUE INDICA ONDE ESSE SERVICE PODE SER INJETADO
+@Injectable({
+  providedIn: 'root'
+})
+// AQUI VEM A LÓGICA DO SERVICE
+export class CounterService {
+
+  constructor() { }
+}
+```
+
+### Injeção de dependências
+
+Injeção de dependências é algo muito comum em diversas linguagens de programação, e no Angular ela também existe. Quanto falamos de injeção de dependências dentro do Angular, estamos dizendo a Angular para nos fornecer uma instância de uma classe.
+
+Geralmente a classe que será injetada serão as classes de `services`, e através da injeção teremos acesso aos métodos que essa classe tem a disposição.
+
+No Angular a injeção de dependências ocorre através do construtor da classe do componente que estamos injetando.
+
+```tsx
+import { Component, OnInit } from '@angular/core';
+import { CounterService } from 'src/app/shared/services/counter.service';
+
+@Component({
+  selector: 'app-counter',
+  templateUrl: './counter.component.html',
+  styleUrls: ['./counter.component.css']
+})
+export class CounterComponent implements OnInit {
+  counter: number = 0
+
+// CLASSE SERVICE É INJETADA NO CONSTRUTOR DO COMPONENTE
+  constructor(private counterService : CounterService) { }
+
+  ngOnInit(): void {
+  }
+	
+// MÉTODOS DO COMPONENTE AGORA TEM ACESSO AOS MÉTODOS DO SERVICE.
+  increment(){
+     return this.counter = this.counterService.increment()
+
+  }
+
+  decrement() {
+    return this.counter = this.counterService.decrement()
+  }
+
+}
+```
+
