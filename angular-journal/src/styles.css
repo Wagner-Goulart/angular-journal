@@ -18,3 +18,17 @@ body {
   align-items: center;
   height: 100vh;
 }
+
+nav {
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bolder;
+}

@@ -142,4 +142,70 @@ export class CounterComponent implements OnInit {
 
 }
 ```
+## Dia 3 ⇒ Rotas no Angular
+
+Seja qual for o `framework` ou biblioteca escolhidos para iniciar a construção de uma aplicação `SPA’s`, é bem provável que as rotas estejam presentes.
+
+Rotas são um conceito muito abordado nas construções `SPA’s ( Single Page Applications )` são eles que permitem que os componentes sejam renderizados na tela sem a necessidade do atualização de toda a página.
+
+No Angular as rotas são criadas no arquivo `app-routing.module.ts`, é possível no momento da criação no projeto com o n`g new` já adicionar o roteamento ao projeto, evitando assim a necessidade de configuração manual.
+
+```tsx
+// ARQUIVO app-routing.module.us
+// IMPORTAÇÇÕES NECESSÁRIO DO ANGULAR PARA QUE O ROTEAMENTO FUNCIONE
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+// COMPONENTES TAMBÉM PRECISAM SER IMPORTADOS.
+import { FirstComponentComponent } from './components/dia-01/first-component/first-component.component';
+import { CounterComponent } from './components/dia-01/counter/counter.component';
+import { ParentDataComponent } from './components/dia-02/parent-data/parent-data.component';
+
+// VARIÁVEL ROUTES DO TIPO ROUTES RECEBE UM ARRAY DE OBJETOS,
+// CADA OBJETO INDICA UM CAMINHOA ( PATH ) E O COMPONENTE QUE SERÁ RENDERIZADO QUANDO O CAMINHO FOR ACESSSADO
+const routes: Routes = [
+  {
+	// CAMINHO -> SE VAZIO INDICA A URL PADRÃO
+    path: '',
+	// COMPONENTE QUE SERÁ RENDERIZADO
+    component: FirstComponentComponent,
+  },
+  {
+// CAMINHO 
+    path: "contador",
+// COMPONENTE QUE SERÁ RENDERIZADO
+    component: CounterComponent
+  },
+  {
+    path: 'parent-data',
+    component: ParentDataComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
+```
+
+Após a configuração das rotas, os componentes devem ser substituídos pelo componente `<router-outlet>` dessa maneira o Angular entenderá o sistema de rotas e renderizará os componentes conforme os caminhos sejam acessados.
+
+Quando a criação de menus de navegação, podem ser criados com a `tag a` normalmente, porém ao invés do atributo `href`, utilizamos um atributo próprio do Angular o `routerLink` e nele é informado o caminho que aquele link deve ser direcionado.
+
+```html
+
+<nav>
+// tags de link com o atributo do Angular routerLink indicando o caminho que deve ser acessado
+  <a routerLink="/">Home</a>
+  <a routerLink="contador">Contador</a>
+  <a routerLink="parent-data">Parent-data</a>
+</nav>
+
+// router-outelet, componente Angular que da acesso as rotas que foram criados no app-routing.module.us
+<router-outlet></router-outlet>
+
+```
+
+a
 
